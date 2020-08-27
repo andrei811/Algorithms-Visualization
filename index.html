@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli&display=swap">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<head>
+    <title>Algorithms</title>
+</head>
+
+<header class="navbar">
+
+    <ul>
+        <li class="navbuttons"><a href="#" class="title">Algorithms Visualization</a></li>
+        <li class="navbuttons">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Algorithms
+                </button>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="dropdownMenuButton">
+
+                    <div class="dropdown-header">Algorithms with vectors</div>
+                    <a class="dropdown-item" id="binarysearch" href="#">Binary Search</a>
+                    <a class="dropdown-item" id="merge" href="#">Merge</a>
+                    <div class="dropdown-header">Sorting</div>
+                    <a class="dropdown-item" id="ssort" href="#">Selection Sort</a>
+                    <a class="dropdown-item" id="bsort" href="#">Bubble Sort</a>
+                    <a class="dropdown-item" id="isort" href="#">Insertion Sort</a>
+                    <a class="dropdown-item" id="msort" href="#">Merge Sort</a>
+                    <a class="dropdown-item" id="qsort" href="#">Quick Sort</a>
+                    <a class="dropdown-item" id="hsort" href="#">Heap Sort</a>
+                    <div class="dropdown-header">Pathfinding Algorithms</div>
+                    <a class="dropdown-item" id="lee" href="#">Lee Algorithm (BFS)</a>
+                </div>
+            </div>
+        </li>
+        <li class="navbuttons"><a href="#" class="buttoncustom">Algorithms</a></li>
+        <li class="navbuttons" id=""><a href="#" class="buttoncustom">Algorithms</a></li>
+        <li class="navbuttons" id="start"><a href="#" class="start-button" id="start-link">START</a></li>
+        <li class="navbuttons" id="clear_board"><a href="#" class="buttoncustom">Clear Board</a></li>
+        <li class="navbuttons">
+            <div class="dropdown" id='speed_div'>
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Speed
+                </button>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" id="slow_btn" href="#">Slow</a>
+                    <a class="dropdown-item" id="medium_btn" href="#">Medium</a>
+                    <a class="dropdown-item" id="fast_btn" href="#">Fast</a>
+
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</header>
+
+<script src="Scripts/clicks.js"></script>
+
+<body>
+    <div class="description">
+        <div id="text_description">PICK AN ALGORITHM!</div>
+    </div>
+
+    <div class="add" id="add">
+        <input type="number" placeholder="Enter a number to find" id="numberbox">
+    </div>
+
+    <table class="board" id="board"></table>
+    <script src="Scripts/nav.js"></script>
+    <script src="Scripts/board.js"></script>
+    </div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+
+</html>

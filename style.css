@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body{
+    background-color: #A0A0A0 !important;
+    overflow: hidden;
+}
+
+.title {
+    font-family: 'Baloo Tamma 2', cursive;
+    font-size: 25px;
+    color: white;
+    text-decoration: none;
+    padding-right: 30px;
+}
+
+.title:hover{
+    text-decoration: none;
+    color: #cccccc;
+}
+
+.navbar{
+    background-color: #3f3f3f;
+    height: 58px;
+}
+
+.navbuttons{
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    margin-top: 0px;
+    outline: none;
+    border: none;
+}
+
+.buttoncustom{
+    text-decoration: none;
+    color: white;
+    font-family: 'Baloo Tamma 2', cursive;
+    font-size: 20px;
+    padding: 15px 10px 6px 10px;
+    margin: 0px 10px 0px 10px;
+    border-radius: 5%;
+    /*transition: 0.3s ease-in;*/
+}
+
+.buttoncustom:hover {
+    text-decoration: none;
+    color: #868686;
+}
+
+.buttoncustom:active{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 202, 0) !important;
+}
+
+#dropdownMenuButton{
+    font-family: 'Baloo Tamma 2', cursive;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 5%;
+    margin-top: -7px !important;
+    margin-left: 10px !important;
+    padding: 15px 10px 10px 15px !important;
+    transition: 0.15s ease-in !important;
+}
+
+#dropdownMenuButton:focus{
+    background-color: rgb(0, 202, 0) !important;
+}
+
+.dropdown-header{
+    font-family: 'Baloo Tamma 2', cursive;
+    font-size: 17px;
+}
+
+.dropdown-item:focus{
+    background-color: black !important;
+}
+
+.dropdown-item{
+    font-family: 'Baloo Tamma 2', cursive;
+}
+
+.start-button{
+    letter-spacing: 3px;
+    text-decoration: none;
+    color: white;
+    font-family: 'Baloo Tamma 2', cursive;
+    font-size: 20px;
+    padding: 10px 30px 4px 35px;
+    margin-left: 100px;
+    background-size: 100px;
+    border-radius: 5%;
+    transition: 0.1s ease-in;
+    background-color: rgb(0, 202, 0);
+    font-weight: bold;
+}
+
+.start-button:active{
+    color:white !important;
+    background-color: #006229 !important;
+}
+
+.start-button:hover{
+    text-decoration: none;
+    background-color: rgb(0, 223, 0);
+    color:white !important;
+}
+
+@keyframes popup{
+    0%{
+        transform: scale(0);
+    }
+    60%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1.0);
+    }
+}
+
+@keyframes slidein{
+    from{
+        transform: translateY(800px);
+    }
+    to{
+        transform: translateY(0px);
+    }
+}
+
+.board{
+    margin: auto;
+}
+
+.board_slide{
+    animation: slidein 1.7s ease-out;
+}
+
+.board_anim{
+    animation: popup 1.7s ease-out;
+}
+
+.description{
+    margin: auto;
+    justify-self: center;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 90px;
+}
+
+.description div{
+    font-family: 'Baloo Tamma 2', cursive;
+    font-size: 18px;
+    display: block;
+    color: white;
+}
+
+.array_elem{
+    padding: 10px 40px 0px 40px;
+    border: solid white 4px;
+    font-family: 'Baloo Tamma 2', cursive;
+    font-size: 70px;
+    font-weight: bold;
+    color: #ffffff;
+    transition: 0.6s ease-in-out;
+    transition-delay: 0ms;
+    background-color: #000000;
+}
+
+.arrow_up{
+    height: 90px;
+    width: 90px;
+    margin-left: 15px;
+}
+
+.arrows{
+    transition:  0.6s ease-in;
+}
+
+.add{
+    height: 50px;
+    display: block;
+    text-align: center;
+    margin: auto;
+    margin-right: 90px;
+    visibility: hidden;
+}
+
+#numberbox{
+    border:none;
+    padding: 5px 10px 2px 10px;
+    font-family: 'Baloo Tamma 2', cursive;
+    font-size: 18px;
+    text-align: center;
+}
+
+#numberbox:focus{
+    border: none;
+    outline: none;
+    box-shadow:0 0 10px #666;
+}
+
+.unvisited{
+    padding: 13px 13px 13px 13px;
+    border: white solid 1px;
+    background-color: transparent;
+    background-image: none;
+}
+
+.wall{
+    padding: 13px 13px 13px 13px;
+    border: white solid 1px;
+    background-color: black;
+}
+
+.start{
+    background-image: url('Images/arrow.jpg');
+    padding: 0px;
+    background-size: 100%;
+    border: white solid 1px;
+    animation: target_arrow_pop_up 2s ease-out;
+}
+.start-filled{
+    background-image: url('Images/arrow.jpg');
+    padding: 0px;
+    background-size: 100%;
+    border: white solid 1px;
+    background-color: #52CDFA;
+}
+.start-path-filled{
+    background-image: url('Images/arrow.jpg');
+    padding: 0px;
+    background-size: 100%;
+    border: white solid 1px;
+    background-color: #FFCB00;
+}
+
+@keyframes target_arrow_pop_up{
+    0%{
+        transform: scale(.3);
+    }
+    75%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1.0);
+    }
+}
+
+@keyframes target_filled_pop_up{
+    0%{
+        transform: scale(.3);
+    }
+    75%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1.0);
+    }
+}
+
+@keyframes target_filled_pop_up2{
+    0%{
+        transform: scale(.3);
+    }
+    75%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1.0);
+    }
+}
+
+.target{
+    background-image: url('Images/target.png');
+    padding: 0px;
+    background-size: 100%;
+    border: white solid 1px;
+    animation: target_arrow_pop_up 2s ease-out;
+}
+.target-filled{
+    background-image: url('Images/target.png') ;
+    background-color: #52CDFA;
+    padding: 0px;
+    background-size: 100%;
+    border: white solid 1px;
+    animation: target_filled_pop_up 0.5s ease-out;
+}
+
+.target-path-filled{
+    background-image: url('Images/target.png') ;
+    background-color: #FFCB00;
+    padding: 0px;
+    background-size: 100%;
+    border: white solid 1px;
+    animation: target_filled_pop_up2 1s ease-out;
+}
+
+@keyframes fill-anim {
+    from {
+      transform: scale(.3);
+      background-color: #5652A1;
+      border-radius: 100%;
+      border: white solid 1px;
+    }
+    to {
+      transform: scale(1.0);
+      background-color: #52CDFA;
+    }
+}
+
+@keyframes path-anim{
+    from {
+        transform: scale(.3);
+        border-radius: 100%;
+        border: white solid 1px;
+      }
+      to {
+        transform: scale(1.0);
+        background-color: #FFCB00;
+      }
+}
+
+.filled{
+    background-color: #52CDFA;
+    padding: 13px 13px 13px 13px;
+    border: white solid 1px;
+    background-image: none;
+    animation: fill-anim 2s;
+}
+
+.pathfilled{
+    background-color: #FFCB00;
+    padding: 13px 13px 13px 13px;
+    border: white solid 1px;
+    background-image: none;
+    animation: path-anim 2s;
+}
+
+#clear_board{
+    padding-left: 50px;
+    display: none;
+}
+
+#speed_div{
+    margin-left: 100px ;
+}
