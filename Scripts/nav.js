@@ -12,6 +12,8 @@ const clearbtn = document.getElementById('clear_board');
 const slow_btn = document.getElementById('slow_btn');
 const medium_btn = document.getElementById('medium_btn');
 const fast_btn = document.getElementById('fast_btn');
+const pause_button = document.getElementById('pause_button');
+const apause_button = document.getElementById('pause-resume');
 
 var algorithms = ["Binary Search", "Merge", "Selection Sort", "Bubble Sort", "Insertion Sort",
     "Merge Sort", "Quick Sort", "Heap Sort", "Lee Algorithm (BFS)"];
@@ -19,6 +21,9 @@ var algorithms = ["Binary Search", "Merge", "Selection Sort", "Bubble Sort", "In
 var selected = null;
 
 binarysearch.onclick = () => {
+    if (alg_running)
+        return;
+
     selected = 'Binary Search';
     // Disable other elements from other visualizations
     Disable_other(selected);
@@ -29,18 +34,25 @@ binarysearch.onclick = () => {
         var board_elem = document.getElementsByClassName("board");
         removeClass(board_elem, "board_slide");
         addClass(board_elem, "board_anim");
+
+        // Adding elements for visualization
+        var add_elem = document.getElementById('add');
+        add_elem.style.display = "block";
+        add_elem.classList.add('add_anim');
     }
     // Adding algorithm's description
     document.getElementById('text_description').innerHTML = '<strong>Binary Search,</strong> is a search algorithm that finds the position of a target value within a sorted array.'
 
-    // Adding elements for visualization
-    document.getElementById('add').style.display = "block";
+
 
     // Initialize board
     vector.init_binary_search();
 }
 
 lee.onclick = () => {
+    if (alg_running)
+        return;
+
     selected = "Lee Algorithm (BFS)";
 
     document.getElementById('text_description').innerHTML = "The Lee algorithm is one possible solution for maze routing problems based on Breadth-first search.";
@@ -62,10 +74,12 @@ lee.onclick = () => {
     document.getElementById('clear_board').style.display = 'inline-block';
 }
 
-
 start.onclick = () => {
-    if (board.running)
+    if (alg_running)
         return;
+
+    take_a_break = false;
+    apause_button.innerHTML = "Pause";
 
     if (selected == "Lee Algorithm (BFS)")
         board.lee();
@@ -76,6 +90,9 @@ start.onclick = () => {
 }
 
 clearbtn.onclick = () => {
+    if (alg_running)
+        return;
+
     board.ClearBoard();
 }
 
@@ -94,6 +111,21 @@ fast_btn.onclick = () => {
     speed_vector = 800;
 }
 
+pause_button.onclick = () => {
+    if (!alg_running)
+        return;
+
+    if (apause_button.innerHTML == "Pause") {
+        take_a_break = true;
+        apause_button.innerHTML = "Resume";
+    }
+    else {
+        take_a_break = false;
+        apause_button.innerHTML = "Pause";
+    }
+
+}
+
 function removeClass(elem, class_name) {
     for (let i = 0; i < elem.length; i++) {
         elem[i].classList.remove(class_name);
@@ -107,24 +139,20 @@ function addClass(elem, class_name) {
 }
 
 function Disable_other(alg_name) {
-    for (let i = 0; i < algorithms.length; i++) {
-        if (algorithms[i] != alg_name) {
-            if (algorithms[i] === "Binary Search") {
-                document.getElementById('add').style.display = "none";
-            }
-            else if (algorithms[i] === "Merge") { }
-            else if (algorithms[i] === "Selection Sort") { }
-            else if (algorithms[i] === "Bubble Sort") { }
-            else if (algorithms[i] === "Insertion Sort") { }
-            else if (algorithms[i] === "Merge Sort") { }
-            else if (algorithms[i] === "Quick Sort") { }
-            else if (algorithms[i] === "Heap Sort") { }
-            else if (algorithms[i] === "Lee Algorithm (BFS)") {
-                document.getElementById('clear_board').style.display = 'none';
-                console.log('aici');
-            }
-            else if (algorithms[i] === "DFS") { }
-        }
+    if (algorithms[0] != alg_name) {
+        var add_elem = document.getElementById('add');
+        add_elem.style.display = "none";
+        add_elem.classList.remove('add_anim');
+    }
+    if (algorithms[1] != alg_name) { }
+    if (algorithms[2] != alg_name) { }
+    if (algorithms[3] != alg_name) { }
+    if (algorithms[4] != alg_name) { }
+    if (algorithms[5] != alg_name) { }
+    if (algorithms[6] != alg_name) { }
+    if (algorithms[7] != alg_name) { }
+    if (algorithms[8] != alg_name) {
+        document.getElementById('clear_board').style.display = 'none';
     }
 }
 

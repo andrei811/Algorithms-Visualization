@@ -2,12 +2,20 @@
 const no_rows = 30;
 const no_cols = 70;
 
-var speed_board = 100;
-var speed_vector = 4000;
+var speed_board = 50;
+var speed_vector = 2500;
+var alg_running = false;
+var take_a_break = false;
 
+// board
 // fast - 0
 // medium - 50
 // slow - 100
+
+// vector
+// fast - 800
+// medium - 2500
+// slow - 4000
 
 var is_board = false, is_vector = false;
 
@@ -37,7 +45,6 @@ class Board {
         this.ostarty = Math.floor(cols / 3) - 5;
 
         this.current_algorithm = null;
-        this.running = false;
         this.aux_number = 2;
         this.mouseDown = false;
         this.stratdrawx = -1;
@@ -153,7 +160,7 @@ class Board {
                 const block = document.getElementById(ID);
 
                 block.onmousedown = () => {
-                    if (this.running)
+                    if (alg_running)
                         return;
                     if (this.cube_board[i][j].status == this.unvisited_n || this.cube_board[i][j].status == this.filled_n) {
                         block.className = this.wall_n;
@@ -180,7 +187,7 @@ class Board {
                 }
 
                 block.onmouseenter = () => {
-                    if (this.running)
+                    if (alg_running)
                         return;
                     if (this.mouseDown) {
                         if (this.cube_board[i][j].status == this.unvisited_n || this.cube_board[i][j].status == this.filled_n) {
@@ -234,7 +241,7 @@ class Board {
     // LEE
 
     lee = () => {
-        this.running = true;
+        alg_running = true;
         this.ClearPathBlocks();
 
         this.cube_board[this.startx][this.starty].distance = 1;
@@ -249,11 +256,14 @@ class Board {
     }
 
     leeaux = () => {
+        if (take_a_break)
+            return;
+
         var newx, newy, x, y;
 
         if (this.queuex.length == 0) {
             clearInterval(this.intid);
-            this.running = false;
+            alg_running = false;
             return;
         }
 
@@ -340,7 +350,7 @@ class Board {
     build_path = () => {
         if (this.path.length == 0) {
             clearInterval(this.intid2);
-            this.running = false;
+            alg_running = false;
             return;
         }
 
@@ -388,7 +398,7 @@ class Vector {
 
     binary_search = () => {
 
-        this.running = true;
+        alg_running = true;
 
         this.init_binary_search();
 
@@ -403,6 +413,9 @@ class Vector {
         var id = setInterval(fun, speed_vector);
 
         function fun() {
+            if (take_a_break)
+                return;
+
             if (lastarrow.length > 0) {
                 document.getElementById("arrow" + lastarrow[0]).style.opacity = "0.0";
                 document.getElementById("arrow" + lastarrow[1]).style.opacity = "0.0";
@@ -418,7 +431,7 @@ class Vector {
 
 
             if (st > dr || found) {
-                board.running = false;
+                alg_running = false;
 
                 for (let i = 0; i < 10; i++)
                     if (i != caut)
