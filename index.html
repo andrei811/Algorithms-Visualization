@@ -15,7 +15,7 @@
 <header class="navbar">
 
     <ul>
-        <li class="navbuttons"><a href="#" class="title">Algorithms Visualization</a></li>
+        <li class="navbuttons"><a href="#" class="title" id="title">Algorithms Visualization</a></li>
         <li class="navbuttons">
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -70,8 +70,16 @@
     </div>
 
     <div class="add" id="add">
-        <input type="number" placeholder="Enter a number to find" id="numberbox">
+        <div id="inpunnumber">
+            <input type="number" placeholder="Enter a number to find" id="numberbox">
+        </div>
+        <div id="sliderinput">
+            <label id="sliderlabel" for="slider">Number of elements:</label>
+            <input type="range" min="10" max="200" id="slider">
+        </div>
     </div>
+
+    <div class="sarray" id="sarray"></div>
 
     <table class="board" id="board"></table>
     <script src="Scripts/nav.js"></script>

@@ -46,7 +46,6 @@ body{
     padding: 15px 10px 6px 10px;
     margin: 0px 10px 0px 10px;
     border-radius: 5%;
-    /*transition: 0.3s ease-in;*/
 }
 
 .buttoncustom:hover {
@@ -192,7 +191,14 @@ body{
     text-align: center;
     margin: auto;
     margin-right: 90px;
-    visibility: hidden;
+}
+
+#inpunnumber{
+    display: none;
+}
+
+#sliderinput{
+    display: none;
 }
 
 @keyframes add_anim{
@@ -364,10 +370,39 @@ body{
     display: none;
 }
 
-#speed_div{
-    margin-left: 100px ;
-}
-
 #pause_button{
     margin-left: 50px;
+}
+
+.sort_array{
+    font-family: 'Baloo Tamma 2', cursive;
+    font-size: 18px;
+    color: white;
+    background-color: black;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid white;
+}
+
+.sarray{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#sliderlabel{
+    font-family: 'Baloo Tamma 2', cursive;
+    font-size: 18px;
+    color: white;
+}
+
+#slider{
+    height: 11px;
+    margin-left: 5px;
+}
+
+#stop_btn{
+    display: none;
 }

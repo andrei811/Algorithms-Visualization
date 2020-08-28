@@ -4,8 +4,11 @@ const no_cols = 70;
 
 var speed_board = 50;
 var speed_vector = 2500;
+var speed_sort = 200;
+
 var alg_running = false;
 var take_a_break = false;
+var current_algorithm = null;
 
 // board
 // fast - 0
@@ -16,6 +19,11 @@ var take_a_break = false;
 // fast - 800
 // medium - 2500
 // slow - 4000
+
+//sort
+//fast - 50
+//medium - 200
+//slow - 500
 
 var is_board = false, is_vector = false;
 
@@ -44,7 +52,6 @@ class Board {
         this.ostartx = Math.floor(rows / 2);
         this.ostarty = Math.floor(cols / 3) - 5;
 
-        this.current_algorithm = null;
         this.aux_number = 2;
         this.mouseDown = false;
         this.stratdrawx = -1;
@@ -94,12 +101,12 @@ class Board {
         document.getElementById('board').innerHTML = tableHTML;
 
         // setting start cube
-        this.cube_board[this.startx][this.starty].status = "start";
-        document.getElementById(this.cube_board[this.startx][this.starty].Id).className = this.start_n;
+        this.cube_board[this.ostartx][this.ostarty].status = "start";
+        document.getElementById(this.cube_board[this.ostartx][this.ostarty].Id).className = this.start_n;
 
         // setting target cube
-        this.cube_board[this.targetx][this.targety].status = "target";
-        document.getElementById(this.cube_board[this.targetx][this.targety].Id).className = this.target_n;
+        this.cube_board[this.otargetx][this.otargety].status = "target";
+        document.getElementById(this.cube_board[this.otargetx][this.otargety].Id).className = this.target_n;
 
         // disable other elements
         var elem = document.getElementById("add");
@@ -228,17 +235,17 @@ class Board {
     }
 
     init_path_finding = () => {
+        document.getElementById("board").classList.remove('table_sort');
         this.CreateBoard();
         this.Add_Events_Listeners();
     }
 
+    // LEE
     in_board = (x, y) => {
         if (x < 0 || y < 0 || x >= this.rows || y >= this.cols)
             return false;
         return true;
     }
-
-    // LEE
 
     lee = () => {
         alg_running = true;
@@ -256,16 +263,18 @@ class Board {
     }
 
     leeaux = () => {
-        if (take_a_break)
-            return;
-
-        var newx, newy, x, y;
-
         if (this.queuex.length == 0) {
             clearInterval(this.intid);
             alg_running = false;
             return;
         }
+
+        if (take_a_break)
+            return;
+
+        var newx, newy, x, y;
+
+
 
         x = this.queuex[0];
         y = this.queuey[0];
@@ -385,6 +394,7 @@ class Vector {
         rowHTML += "</tr>";
         var table = document.getElementById("board");
         table.innerHTML = rowHTML;
+        table.classList.remove('table_sort');
 
         for (let i = 0; i < 10; i++)
             document.getElementById("arrow" + i).style.opacity = "0.0";
@@ -413,6 +423,7 @@ class Vector {
         var id = setInterval(fun, speed_vector);
 
         function fun() {
+
             if (take_a_break)
                 return;
 
@@ -484,5 +495,151 @@ class Vector {
     }
 }
 
+class Sort_Elem {
+    constructor(pos, num) {
+        this.Id = 'sarr' + pos;
+        this.num = num;
+        this.height = 0;
+        this.color = null;
+    }
+}
+
+class Sort_Vector {
+
+    constructor() {
+        this.wp = 75;
+        this.hp = 67;
+        this.width = 0;
+        this.height = 0;
+        this.array = [];
+        this.size = 80;
+        // max size with numbers = 40
+    }
+
+    resize_vector = (new_size) => {
+        this.size = new_size;
+
+        this.array = [];
+
+        this.init_sort_vector();
+    }
+
+    init_sort_vector = () => {
+        // 1200 <->
+        // 650 ^v
+
+        document.getElementById('slider').value = this.size;
+
+        var rowHTML = "";
+
+        for (let i = 0; i < this.size; i++) {
+            this.array.push(new Sort_Elem(i, Math.floor((Math.random() * 650) + 50)));
+            rowHTML += '<div class="sort_array" id="sarr' + i + '"></div>';
+        }
+
+        var table = document.getElementById("sarray");
+        table.style.display = 'block';
+
+        table.innerHTML = rowHTML;
+
+        this.width = Math.floor((this.wp * window.innerWidth) / 100);
+        this.height = Math.floor((this.hp * window.innerHeight) / 100);
+
+        table.style.width = (this.width + 10) + 'px';
+        table.style.height = (this.height + 10) + 'px';
+
+        var elem_width = Math.floor(this.width / this.size);
+
+        for (let i = 0; i < this.size; i++) {
+            var elem = document.getElementById('sarr' + i);
+            elem.style.width = elem_width.toString() + 'px';
+            elem.style.height = (Math.floor((this.array[i].num * this.height) / 650)).toString() + 'px';
+            this.array[i].height = (Math.floor((this.array[i].num * this.height) / 650));
+        }
+    }
+
+    selection_sort = () => {
+        alg_running = true;
+        this.pointer1 = 0;
+        this.lastpointer1 = -1;
+        this.pointer2 = 1;
+        this.lastpointer2 = -1;
+
+        this.idint1 = setInterval(this.selection_sort_aux, speed_sort);
+    }
+
+    selection_sort_aux = () => {
+
+        // if pause...
+        if (take_a_break)
+            return;
+
+        // reset color of last 2 compared elements
+        if (this.lastpointer1 != -1) {
+            this.array[this.lastpointer1].color = "black";
+            document.getElementById(this.array[this.lastpointer1].Id).style.backgroundColor = "black";
+        }
+        if (this.lastpointer2 != -1) {
+            this.array[this.lastpointer2].color = "black";
+            document.getElementById(this.array[this.lastpointer2].Id).style.backgroundColor = "black";
+        }
+
+        // if the sort has ended
+        if (this.pointer2 == this.size) {
+            alg_running = false;
+            clearInterval(this.idint1);
+            return;
+        }
+
+        // color green the elements that are compared
+        if (this.array[this.pointer1].color != "green") {
+            this.array[this.pointer1].color = "green";
+            document.getElementById(this.array[this.pointer1].Id).style.backgroundColor = "green";
+        }
+        if (this.array[this.pointer2].color != "green") {
+            this.array[this.pointer2].color = "green";
+            document.getElementById(this.array[this.pointer2].Id).style.backgroundColor = "green";
+        }
+
+        // if the elements should swap...
+        if (this.array[this.pointer1].num > this.array[this.pointer2].num) {
+
+            // the color of blocks becomes red
+            this.array[this.pointer1].color = "red";
+            document.getElementById(this.array[this.pointer1].Id).style.backgroundColor = "red";
+
+            this.array[this.pointer2].color = "red";
+            document.getElementById(this.array[this.pointer2].Id).style.backgroundColor = "red";
+
+            // swapping objects...
+            let temp = this.array[this.pointer1];
+            this.array[this.pointer1] = this.array[this.pointer2];
+            this.array[this.pointer2] = temp;
+
+            let temp2 = this.array[this.pointer1].Id;
+            this.array[this.pointer1].Id = this.array[this.pointer2].Id;
+            this.array[this.pointer2].Id = temp2;
+
+            // setting the right height and number...
+            var elem1 = document.getElementById(this.array[this.pointer1].Id);
+            elem1.style.height = this.array[this.pointer1].height + 'px';
+
+            var elem1 = document.getElementById(this.array[this.pointer2].Id);
+            elem1.style.height = this.array[this.pointer2].height + 'px';
+        }
+
+        // move the pointers...
+        this.lastpointer2 = this.pointer2;
+        this.pointer2++;
+
+        if (this.pointer2 == this.size) {
+            this.lastpointer1 = this.pointer1;
+            this.pointer1++;
+            this.pointer2 = this.pointer1 + 1;
+        }
+    }
+}
+
 let board = new Board(no_rows, no_cols);
 let vector = new Vector();
+let sort_vector = new Sort_Vector();
