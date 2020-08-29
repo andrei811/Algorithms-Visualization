@@ -652,6 +652,190 @@ class Sort_Vector {
             this.pointer2 = this.pointer1 + 1;
         }
     }
+
+    insertion_sort = () => {
+        alg_running = true;
+        this.pointer1 = 1;
+        this.lastpointer1 = -1;
+        this.pointer2 = 1;
+        this.lastpointer2 = -1;
+        this.pointer3 = 0;
+        this.lastpointer3 = -1;
+
+        this.idint2 = setInterval(this.insertion_sort_aux, speed_sort);
+    }
+
+    insertion_sort_aux = () => {
+        // if pause...
+        if (take_a_break)
+            return;
+
+        // reset color of last 2 compared elements
+        if (this.lastpointer1 != -1 && this.array[this.lastpointer1].color != "black") {
+            this.array[this.lastpointer1].color = "black";
+            document.getElementById(this.array[this.lastpointer1].Id).style.backgroundColor = "black";
+        }
+        if (this.lastpointer2 != -1 && this.array[this.lastpointer2].color != "black") {
+            this.array[this.lastpointer2].color = "black";
+            document.getElementById(this.array[this.lastpointer2].Id).style.backgroundColor = "black";
+        }
+        if (this.lastpointer3 != -1 && this.array[this.lastpointer3].color != "black") {
+            this.array[this.lastpointer3].color = "black";
+            document.getElementById(this.array[this.lastpointer3].Id).style.backgroundColor = "black";
+        }
+
+        // if the sort has ended
+        if (this.pointer1 == this.size) {
+            alg_running = false;
+            clearInterval(this.idint2);
+            return;
+        }
+
+        console.log(this.pointer2, this.pointer3);
+
+        // color green the elements that are compared
+        if (this.array[this.pointer1].color != "green") {
+            this.array[this.pointer1].color = "green";
+            document.getElementById(this.array[this.pointer1].Id).style.backgroundColor = "green";
+        }
+        if (this.array[this.pointer2].color != "red") {
+            this.array[this.pointer2].color = "red";
+            document.getElementById(this.array[this.pointer2].Id).style.backgroundColor = "red";
+        }
+        if (this.array[this.pointer3].color != "red") {
+            this.array[this.pointer3].color = "red";
+            document.getElementById(this.array[this.pointer3].Id).style.backgroundColor = "red";
+        }
+
+        // if the elements should swap...
+        if (this.array[this.pointer3].num > this.array[this.pointer2].num) {
+
+            // swapping objects...
+            let temp = this.array[this.pointer3];
+            this.array[this.pointer3] = this.array[this.pointer2];
+            this.array[this.pointer2] = temp;
+
+            let temp2 = this.array[this.pointer3].Id;
+            this.array[this.pointer3].Id = this.array[this.pointer2].Id;
+            this.array[this.pointer2].Id = temp2;
+
+            temp2 = this.array[this.pointer3].color;
+            this.array[this.pointer3].color = this.array[this.pointer2].color;
+            this.array[this.pointer2].color = temp2;
+
+            // setting the right height and number...
+            var elem1 = document.getElementById(this.array[this.pointer3].Id);
+            elem1.style.height = this.array[this.pointer3].height + 'px';
+
+            var elem1 = document.getElementById(this.array[this.pointer2].Id);
+            elem1.style.height = this.array[this.pointer2].height + 'px';
+        }
+
+        // move the pointers...
+        this.lastpointer2 = this.pointer2;
+        this.lastpointer3 = this.pointer3;
+        this.pointer2--;
+        this.pointer3--;
+
+        if (this.pointer3 < 0) {
+            this.lastpointer1 = this.pointer1;
+            this.pointer1++;
+            this.pointer2 = this.pointer1;
+            this.pointer3 = this.pointer2 - 1;
+        }
+    }
+
+    bubble_sort = () => {
+        alg_running = true;
+        this.pointer1 = 0;
+        this.lastpointer1 = -1;
+        this.pointer2 = 1;
+        this.lastpointer2 = -1;
+        this.swapped = false;
+        this.should_stop = false;
+        this.size_aux = this.size;
+
+        this.idint3 = setInterval(this.bubble_sort_aux, speed_sort);
+    }
+
+    bubble_sort_aux = () => {
+        // if pause...
+        if (take_a_break)
+            return;
+
+        // reset color of last 2 compared elements
+        if (this.lastpointer1 != -1) {
+            this.array[this.lastpointer1].color = "black";
+            document.getElementById(this.array[this.lastpointer1].Id).style.backgroundColor = "black";
+        }
+        if (this.lastpointer2 != -1) {
+            this.array[this.lastpointer2].color = "black";
+            document.getElementById(this.array[this.lastpointer2].Id).style.backgroundColor = "black";
+        }
+
+        // if the sort has ended
+        if (this.should_stop) {
+            alg_running = false;
+            clearInterval(this.idint1);
+            return;
+        }
+
+        // color green the elements that are compared
+        if (this.array[this.pointer1].color != "green") {
+            this.array[this.pointer1].color = "green";
+            document.getElementById(this.array[this.pointer1].Id).style.backgroundColor = "green";
+        }
+        if (this.array[this.pointer2].color != "green") {
+            this.array[this.pointer2].color = "green";
+            document.getElementById(this.array[this.pointer2].Id).style.backgroundColor = "green";
+        }
+
+        // if the elements should swap...
+        if (this.array[this.pointer1].num > this.array[this.pointer2].num) {
+
+            this.swapped = true;
+            // the color of blocks becomes red
+            this.array[this.pointer1].color = "red";
+            document.getElementById(this.array[this.pointer1].Id).style.backgroundColor = "red";
+
+            this.array[this.pointer2].color = "red";
+            document.getElementById(this.array[this.pointer2].Id).style.backgroundColor = "red";
+
+            // swapping objects...
+            let temp = this.array[this.pointer1];
+            this.array[this.pointer1] = this.array[this.pointer2];
+            this.array[this.pointer2] = temp;
+
+            let temp2 = this.array[this.pointer1].Id;
+            this.array[this.pointer1].Id = this.array[this.pointer2].Id;
+            this.array[this.pointer2].Id = temp2;
+
+            // setting the right height and number...
+            var elem1 = document.getElementById(this.array[this.pointer1].Id);
+            elem1.style.height = this.array[this.pointer1].height + 'px';
+
+            var elem1 = document.getElementById(this.array[this.pointer2].Id);
+            elem1.style.height = this.array[this.pointer2].height + 'px';
+        }
+
+        // move the pointers...
+        this.lastpointer2 = this.pointer2;
+        this.pointer2++;
+        this.lastpointer1 = this.pointer1;
+        this.pointer1++;
+
+        console.log(this.pointer2, this.size);
+
+        if (this.pointer2 == this.size_aux) {
+            this.pointer1 = 0;
+            this.pointer2 = 1;
+            this.size_aux--;
+            if (!this.swapped) {
+                this.should_stop = true;
+            }
+            this.swapped = false;
+        }
+    }
 }
 
 let board = new Board(no_rows, no_cols);

@@ -105,6 +105,52 @@ ssort.onclick = () => {
     sort_vector.init_sort_vector();
 }
 
+isort.onclick = () => {
+    if (alg_running)
+        return;
+
+    document.getElementById('board').style.display = "none";
+
+    selected = 'Insertion Sort';
+    // Disable other elements from other visualizations
+    Disable_other(selected);
+
+    // Adding algorithm's description
+    document.getElementById('text_description').innerHTML
+        = '<strong>The Selection Sort Algorithm</strong> sorts an array by repeatedly finding the minimum element from unsorted part and putting it at the beginning.'
+
+    // add slider for number of elements
+
+    document.getElementById('sliderinput').style.display = "block";
+    document.getElementById('new_array').style.display = "inline";
+
+    // Initialize board
+    sort_vector.init_sort_vector();
+}
+
+bsort.onclick = () => {
+    if (alg_running)
+        return;
+
+    document.getElementById('board').style.display = "none";
+
+    selected = 'Bubble Sort';
+    // Disable other elements from other visualizations
+    Disable_other(selected);
+
+    // Adding algorithm's description
+    document.getElementById('text_description').innerHTML
+        = '<strong>The Selection Sort Algorithm</strong> sorts an array by repeatedly finding the minimum element from unsorted part and putting it at the beginning.'
+
+    // add slider for number of elements
+
+    document.getElementById('sliderinput').style.display = "block";
+    document.getElementById('new_array').style.display = "inline";
+
+    // Initialize board
+    sort_vector.init_sort_vector();
+}
+
 start.onclick = () => {
 
     if (alg_running)
@@ -119,7 +165,10 @@ start.onclick = () => {
         vector.binary_search();
     else if (selected == "Selection Sort")
         sort_vector.selection_sort();
-
+    else if (selected == "Insertion Sort")
+        sort_vector.insertion_sort();
+    else if (selected == "Bubble Sort")
+        sort_vector.bubble_sort();
 
 }
 
@@ -201,8 +250,16 @@ function Disable_other(alg_name) {
         document.getElementById('sliderinput').style.display = 'none';
         document.getElementById('new_array').style.display = "none";
     }
-    if (algorithms[3] != alg_name) { }
-    if (algorithms[4] != alg_name) { }
+    if (algorithms[3] != alg_name) {
+        document.getElementById("sarray").style.display = 'none';
+        document.getElementById('sliderinput').style.display = 'none';
+        document.getElementById('new_array').style.display = "none";
+    }
+    if (algorithms[4] != alg_name) {
+        document.getElementById("sarray").style.display = 'none';
+        document.getElementById('sliderinput').style.display = 'none';
+        document.getElementById('new_array').style.display = "none";
+    }
     if (algorithms[5] != alg_name) { }
     if (algorithms[6] != alg_name) { }
     if (algorithms[7] != alg_name) { }
