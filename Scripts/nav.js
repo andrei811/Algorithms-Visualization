@@ -16,6 +16,7 @@ const fast_btn = document.getElementById('fast_btn');
 const pause_button = document.getElementById('pause_button');
 const apause_button = document.getElementById('pause-resume');
 const slider = document.getElementById('slider');
+const new_array = document.getElementById('new_array');
 
 var algorithms = ["Binary Search", "Merge", "Selection Sort", "Bubble Sort", "Insertion Sort",
     "Merge Sort", "Quick Sort", "Heap Sort", "Lee Algorithm (BFS)"];
@@ -98,6 +99,7 @@ ssort.onclick = () => {
     // add slider for number of elements
 
     document.getElementById('sliderinput').style.display = "block";
+    document.getElementById('new_array').style.display = "inline";
 
     // Initialize board
     sort_vector.init_sort_vector();
@@ -119,6 +121,13 @@ start.onclick = () => {
         sort_vector.selection_sort();
 
 
+}
+
+new_array.onclick = () => {
+    if (alg_running)
+        return;
+    console.log('aici');
+    sort_vector.resize_vector(sort_vector.size);
 }
 
 slider.oninput = () => {
@@ -190,6 +199,7 @@ function Disable_other(alg_name) {
     if (algorithms[2] != alg_name) {
         document.getElementById("sarray").style.display = 'none';
         document.getElementById('sliderinput').style.display = 'none';
+        document.getElementById('new_array').style.display = "none";
     }
     if (algorithms[3] != alg_name) { }
     if (algorithms[4] != alg_name) { }

@@ -399,10 +399,32 @@ body{
 }
 
 #slider{
-    height: 11px;
+    height: 8px;
     margin-left: 5px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7; 
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 10%;
 }
 
+#slider::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgb(0, 202, 0);
+    cursor: pointer;
+  }
+
 #stop_btn{
+    display: none;
+}
+
+#new_array{
     display: none;
 }

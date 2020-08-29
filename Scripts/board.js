@@ -512,8 +512,8 @@ class Sort_Vector {
         this.width = 0;
         this.height = 0;
         this.array = [];
-        this.size = 80;
-        // max size with numbers = 40
+        this.size = 40;
+        this.nr_max = 670;
     }
 
     resize_vector = (new_size) => {
@@ -532,8 +532,22 @@ class Sort_Vector {
 
         var rowHTML = "";
 
+        var frecv = new Array(this.nr_max);
+
+        for (let i = 0; i < this.nr_max; i++) {
+            frecv[i] = 0;
+        }
+
         for (let i = 0; i < this.size; i++) {
-            this.array.push(new Sort_Elem(i, Math.floor((Math.random() * 650) + 50)));
+            let temp = Math.floor((Math.random() * 650) + 50);
+
+            while (frecv[temp] != 0) {
+                temp = Math.floor((Math.random() * 650) + 50);
+            }
+
+            frecv[temp] = 1;
+
+            this.array.push(new Sort_Elem(i, temp));
             rowHTML += '<div class="sort_array" id="sarr' + i + '"></div>';
         }
 
