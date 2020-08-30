@@ -521,10 +521,10 @@ class Sort_Vector {
 
         this.array = [];
 
-        this.init_sort_vector();
+        this.init_sort_vector(false);
     }
 
-    init_sort_vector = () => {
+    init_sort_vector = (da = true) => {
         // 1200 <->
         // 650 ^v
 
@@ -569,6 +569,11 @@ class Sort_Vector {
             elem.style.width = elem_width.toString() + 'px';
             elem.style.height = (Math.floor((this.array[i].num * this.height) / 650)).toString() + 'px';
             this.array[i].height = (Math.floor((this.array[i].num * this.height) / 650));
+        }
+
+        if (da) {
+            document.getElementById('sarray').classList.add('fall');
+            document.getElementById('sliderinput').classList.add('fall');
         }
     }
 

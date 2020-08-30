@@ -16,6 +16,7 @@ const fast_btn = document.getElementById('fast_btn');
 const pause_button = document.getElementById('pause_button');
 const apause_button = document.getElementById('pause-resume');
 const slider = document.getElementById('slider');
+const sliderinput = document.getElementById('sliderinput');
 const new_array = document.getElementById('new_array');
 
 var algorithms = ["Binary Search", "Merge", "Selection Sort", "Bubble Sort", "Insertion Sort",
@@ -105,28 +106,6 @@ ssort.onclick = () => {
     sort_vector.init_sort_vector();
 }
 
-isort.onclick = () => {
-    if (alg_running)
-        return;
-
-    document.getElementById('board').style.display = "none";
-
-    selected = 'Insertion Sort';
-    // Disable other elements from other visualizations
-    Disable_other(selected);
-
-    // Adding algorithm's description
-    document.getElementById('text_description').innerHTML
-        = '<strong>The Selection Sort Algorithm</strong> sorts an array by repeatedly finding the minimum element from unsorted part and putting it at the beginning.'
-
-    // add slider for number of elements
-
-    document.getElementById('sliderinput').style.display = "block";
-    document.getElementById('new_array').style.display = "inline";
-
-    // Initialize board
-    sort_vector.init_sort_vector();
-}
 
 bsort.onclick = () => {
     if (alg_running)
@@ -140,7 +119,30 @@ bsort.onclick = () => {
 
     // Adding algorithm's description
     document.getElementById('text_description').innerHTML
-        = '<strong>The Selection Sort Algorithm</strong> sorts an array by repeatedly finding the minimum element from unsorted part and putting it at the beginning.'
+        = '<strong>Bubble Sort</strong> is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in wrong order.'
+
+    // add slider for number of elements
+
+    document.getElementById('sliderinput').style.display = "block";
+    document.getElementById('new_array').style.display = "inline";
+
+    // Initialize board
+    sort_vector.init_sort_vector();
+}
+
+isort.onclick = () => {
+    if (alg_running)
+        return;
+
+    document.getElementById('board').style.display = "none";
+
+    selected = 'Insertion Sort';
+    // Disable other elements from other visualizations
+    Disable_other(selected);
+
+    // Adding algorithm's description
+    document.getElementById('text_description').innerHTML
+        = '<strong>Insertion sort</strong> is a simple sorting algorithm that builds the final sorted array (or list) one item at a time.'
 
     // add slider for number of elements
 
@@ -249,16 +251,22 @@ function Disable_other(alg_name) {
         document.getElementById("sarray").style.display = 'none';
         document.getElementById('sliderinput').style.display = 'none';
         document.getElementById('new_array').style.display = "none";
+        ssort.classList.remove('fall');
+        sliderinput.classList.remove('fall');
     }
     if (algorithms[3] != alg_name) {
         document.getElementById("sarray").style.display = 'none';
         document.getElementById('sliderinput').style.display = 'none';
         document.getElementById('new_array').style.display = "none";
+        bsort.classList.remove('fall');
+        sliderinput.classList.remove('fall');
     }
     if (algorithms[4] != alg_name) {
         document.getElementById("sarray").style.display = 'none';
         document.getElementById('sliderinput').style.display = 'none';
         document.getElementById('new_array').style.display = "none";
+        isort.classList.remove('fall');
+        isort.classList.remove('fall');
     }
     if (algorithms[5] != alg_name) { }
     if (algorithms[6] != alg_name) { }
