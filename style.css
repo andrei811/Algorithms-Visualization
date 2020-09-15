@@ -95,7 +95,7 @@ body{
     font-family: 'Baloo Tamma 2', cursive;
     font-size: 20px;
     padding: 10px 30px 4px 35px;
-    margin-left: 100px;
+    margin-left: 50px;
     background-size: 100px;
     border-radius: 5%;
     transition: 0.1s ease-in;
@@ -441,4 +441,8 @@ body{
 
 #new_array{
     display: none;
+}
+
+.Speed_btn{
+    margin-left: 50px !important;
 }

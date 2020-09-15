@@ -106,7 +106,6 @@ ssort.onclick = () => {
     sort_vector.init_sort_vector();
 }
 
-
 bsort.onclick = () => {
     if (alg_running)
         return;
@@ -153,6 +152,29 @@ isort.onclick = () => {
     sort_vector.init_sort_vector();
 }
 
+qsort.onclick = () => {
+    if (alg_running)
+        return;
+
+    document.getElementById('board').style.display = "none";
+
+    selected = 'Quick Sort';
+    // Disable other elements from other visualizations
+    Disable_other(selected);
+
+    // Adding algorithm's description
+    document.getElementById('text_description').innerHTML
+        = '<strong>Quick sort</strong> is a simple sorting algorithm that builds the final sorted array (or list) one item at a time.'
+
+    // add slider for number of elements
+
+    document.getElementById('sliderinput').style.display = "block";
+    document.getElementById('new_array').style.display = "inline";
+
+    // Initialize board
+    sort_vector.init_sort_vector();
+}
+
 start.onclick = () => {
 
     if (alg_running)
@@ -171,13 +193,15 @@ start.onclick = () => {
         sort_vector.insertion_sort();
     else if (selected == "Bubble Sort")
         sort_vector.bubble_sort();
+    else if (selected == "Quick Sort") {
+        sort_vector.quick_sort();
+    }
 
 }
 
 new_array.onclick = () => {
     if (alg_running)
         return;
-    console.log('aici');
     sort_vector.resize_vector(sort_vector.size);
 }
 
@@ -266,10 +290,16 @@ function Disable_other(alg_name) {
         document.getElementById('sliderinput').style.display = 'none';
         document.getElementById('new_array').style.display = "none";
         isort.classList.remove('fall');
-        isort.classList.remove('fall');
+        sliderinput.classList.remove('fall');
     }
     if (algorithms[5] != alg_name) { }
-    if (algorithms[6] != alg_name) { }
+    if (algorithms[6] != alg_name) {
+        document.getElementById("sarray").style.display = 'none';
+        document.getElementById('sliderinput').style.display = 'none';
+        document.getElementById('new_array').style.display = "none";
+        isort.classList.remove('fall');
+        sliderinput.classList.remove('fall');
+    }
     if (algorithms[7] != alg_name) { }
     if (algorithms[8] != alg_name) {
         document.getElementById('clear_board').style.display = 'none';

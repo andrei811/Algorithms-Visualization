@@ -514,6 +514,8 @@ class Sort_Vector {
         this.array = [];
         this.size = 40;
         this.nr_max = 670;
+        this.idint5 = null;
+        this.todispach = [];
     }
 
     resize_vector = (new_size) => {
@@ -696,8 +698,6 @@ class Sort_Vector {
             return;
         }
 
-        console.log(this.pointer2, this.pointer3);
-
         // color green the elements that are compared
         if (this.array[this.pointer1].color != "green") {
             this.array[this.pointer1].color = "green";
@@ -829,7 +829,6 @@ class Sort_Vector {
         this.lastpointer1 = this.pointer1;
         this.pointer1++;
 
-        console.log(this.pointer2, this.size);
 
         if (this.pointer2 == this.size_aux) {
             this.pointer1 = 0;
@@ -840,6 +839,136 @@ class Sort_Vector {
             }
             this.swapped = false;
         }
+    }
+
+    quick_sort = () => {
+        this.alg_running = true;
+        this.quick_sort_aux(0, this.array.length - 1);
+        this.dispach();
+    }
+
+    quick_sort_aux = (st, dr) => {
+        if (st < dr) {
+            var part = this.partition(st, dr);
+
+            this.quick_sort_aux(st, part);
+            this.quick_sort_aux(part + 1, dr);
+        }
+
+    }
+
+    partition = (st, dr) => {
+        var pivot = this.array[st].num;
+
+        this.todispach.push([-3, st, dr]);
+        st--;
+        dr++;
+
+        while (st < dr) {
+
+            do {
+                dr--;
+                this.todispach.push([-1, dr]);
+            }
+            while (st < dr && this.array[dr].num > pivot);
+
+            do {
+                st++;
+                this.todispach.push([-2, st]);
+            }
+            while (st < dr && this.array[st].num < pivot);
+
+            if (st < dr) {
+                let temp = this.array[st];
+                this.array[st] = this.array[dr];
+                this.array[dr] = temp;
+
+                let temp2 = this.array[st].Id;
+                this.array[st].Id = this.array[dr].Id;
+                this.array[dr].Id = temp2;
+
+                this.todispach.push([st, dr]);
+            }
+        }
+
+        return dr;
+
+    }
+
+    dispach = () => {
+        this.lasti = -1;
+        this.lastj = -1;
+        this.lastpointer1 = -1;
+        this.lastpointer2 = -1;
+        this.idint4 = setInterval(this.dispach_aux, 10);
+    }
+
+    dispach_aux = () => {
+
+        if (this.lastpointer1 != -1) {
+            document.getElementById(this.array[this.lastpointer2].Id).style.backgroundColor = "black";
+            document.getElementById(this.array[this.lastpointer1].Id).style.backgroundColor = "black";
+        }
+
+        if (this.todispach.length <= 0) {
+            this.alg_running = false;
+            if (this.lasti != -1) {
+                document.getElementById(this.array[this.lasti].Id).style.backgroundColor = "black";
+                document.getElementById(this.array[this.lastj].Id).style.backgroundColor = "black";
+            }
+            clearInterval(this.idint4);
+            return;
+        }
+
+        let i = this.todispach[0][0];
+        let j = this.todispach[0][1];
+
+        if (i == -3) {
+            if (this.lasti != -1) {
+                document.getElementById(this.array[this.lasti].Id).style.backgroundColor = "black";
+                document.getElementById(this.array[this.lastj].Id).style.backgroundColor = "black";
+            }
+            i = j;
+            j = this.todispach[0][2];
+            this.todispach.shift();
+
+            document.getElementById(this.array[i].Id).style.backgroundColor = "green";
+            this.lasti = i;
+
+            document.getElementById(this.array[j].Id).style.backgroundColor = "green";
+            this.lastj = j;
+            return;
+        }
+
+        this.todispach.shift();
+
+        if (i == -2) {
+            i = j;
+            document.getElementById(this.array[this.lasti].Id).style.backgroundColor = "black";
+            document.getElementById(this.array[i].Id).style.backgroundColor = "green";
+            this.lasti = i;
+            return;
+        }
+
+        if (i == -1) {
+            document.getElementById(this.array[this.lastj].Id).style.backgroundColor = "black";
+            document.getElementById(this.array[j].Id).style.backgroundColor = "green";
+            this.lastj = j;
+            return;
+        }
+
+
+
+        // setting the right height and number...
+        var elem1 = document.getElementById(this.array[j].Id);
+        elem1.style.height = this.array[j].height + 'px';
+        elem1.style.backgroundColor = "red";
+        this.lastpointer1 = j;
+
+        var elem1 = document.getElementById(this.array[i].Id);
+        elem1.style.height = this.array[i].height + 'px';
+        elem1.style.backgroundColor = "red";
+        this.lastpointer2 = j;
     }
 }
 
