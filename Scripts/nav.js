@@ -238,6 +238,7 @@ fast_btn.onclick = () => {
 }
 
 pause_button.onclick = () => {
+    console.log(alg_running);
     if (!alg_running)
         return;
 

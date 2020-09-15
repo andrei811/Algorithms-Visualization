@@ -842,7 +842,7 @@ class Sort_Vector {
     }
 
     quick_sort = () => {
-        this.alg_running = true;
+        alg_running = true;
         this.quick_sort_aux(0, this.array.length - 1);
         this.dispach();
     }
@@ -900,10 +900,14 @@ class Sort_Vector {
         this.lastj = -1;
         this.lastpointer1 = -1;
         this.lastpointer2 = -1;
-        this.idint4 = setInterval(this.dispach_aux, 10);
+        this.idint4 = setInterval(this.dispach_aux, (20 * speed_sort / 100));
     }
 
     dispach_aux = () => {
+
+        if (take_a_break) {
+            return;
+        }
 
         if (this.lastpointer1 != -1) {
             document.getElementById(this.array[this.lastpointer2].Id).style.backgroundColor = "black";
@@ -911,7 +915,7 @@ class Sort_Vector {
         }
 
         if (this.todispach.length <= 0) {
-            this.alg_running = false;
+            alg_running = false;
             if (this.lasti != -1) {
                 document.getElementById(this.array[this.lasti].Id).style.backgroundColor = "black";
                 document.getElementById(this.array[this.lastj].Id).style.backgroundColor = "black";
