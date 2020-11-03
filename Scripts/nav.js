@@ -1,12 +1,9 @@
 const title = document.getElementById('title');
 const binarysearch = document.getElementById('binarysearch');
-const merge = document.getElementById('merge');
 const ssort = document.getElementById('ssort');
 const bsort = document.getElementById('bsort');
 const isort = document.getElementById('isort');
-const msort = document.getElementById('msort');
 const qsort = document.getElementById('qsort');
-const hsort = document.getElementById('hsort');
 const lee = document.getElementById('lee');
 const start = document.getElementById('start-link');
 const clearbtn = document.getElementById('clear_board');
@@ -196,7 +193,9 @@ start.onclick = () => {
     else if (selected == "Quick Sort") {
         sort_vector.quick_sort();
     }
-
+    else if (selected == "Merge Sort") {
+        sort_vector.merge_sort();
+    }
 }
 
 new_array.onclick = () => {

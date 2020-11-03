@@ -854,7 +854,6 @@ class Sort_Vector {
             this.quick_sort_aux(st, part);
             this.quick_sort_aux(part + 1, dr);
         }
-
     }
 
     partition = (st, dr) => {
@@ -973,6 +972,111 @@ class Sort_Vector {
         elem1.style.height = this.array[i].height + 'px';
         elem1.style.backgroundColor = "red";
         this.lastpointer2 = j;
+    }
+
+    merge_sort = () => {
+        alg_running = true;
+
+        this.merge_sort_aux(0, this.array.length - 1);
+
+        this.dispach2();
+    }
+
+    merge_sort_aux = (st, dr) => {
+        if (st < dr) {
+
+            this.merge_sort_aux(st, Math.floor((st + dr) / 2));
+            this.merge_sort_aux(Math.floor((st + dr) / 2) + 1, dr);
+
+            this.merge(st, dr);
+        }
+    }
+
+    merge = (st, dr) => {
+        var auxvect = [];
+        var mid = Math.floor((st + dr) / 2);
+
+        var i = st, j = mid + 1, aux;
+
+        while (i <= mid && j <= dr) {
+            if (this.array[i].num > this.array[j].num)
+                auxvect.push([this.array[j].num, this.array[j].height]), j++;
+            else
+                auxvect.push([this.array[i].num, this.array[i].height]), i++;
+
+            this.todispach.push([2, i, j]);
+        }
+
+        while (i <= mid) {
+            this.todispach.push([1, i]);
+            auxvect.push([this.array[i].num, this.array[i].height]);
+            i++;
+        }
+        while (j <= dr) {
+            this.todispach.push([1, j]);
+            auxvect.push([this.array[j].num, this.array[j].height]);
+            j++;
+        }
+
+        for (let k = st; k <= dr; k++) {
+            this.todispach.push([3, k]);
+            this.array[k].num = auxvect[k - st][0];
+            this.array[k].height = auxvect[k - st][1];
+        }
+    }
+
+    dispach2 = () => {
+        this.lasti = -1;
+        this.idint6 = setInterval(this.dispach2_aux, (20 * speed_sort / 100));
+    }
+
+    dispach2_aux = () => {
+
+        if (this.lasti != -1) {
+            document.getElementById(this.array[this.lasti].Id).style.backgroundColor = "black";
+            document.getElementById(this.array[this.lasti].Id).style.backgroundColor = "black";
+        }
+
+        if (take_a_break) {
+            return;
+        }
+
+        if (this.todispach.length <= 0) {
+            alg_running = false;
+
+            if (this.lasti != -1) {
+                document.getElementById(this.array[this.lasti].Id).style.backgroundColor = "black";
+            }
+
+            clearInterval(this.idint6);
+            return;
+        }
+
+        let i, j;
+
+        i = this.todispach[0][0];
+        j = this.todispach[0][1];
+
+
+        if (i == 1) {
+            document.getElementById(this.array[j].Id).style.backgroundColor = "red";
+        }
+        else if (i == 2) {
+            i = j;
+            j = this.todispach[0][2];
+            console.log(i, j);
+
+            document.getElementById(this.array[i].Id).style.backgroundColor = "red";
+            document.getElementById(this.array[j].Id).style.backgroundColor = "red";
+        }
+        else if (i == 3) {
+            let elemen = document.getElementById(this.array[j].Id);
+            elemen.style.backgroundColor = "green";
+            elemen.style.height = this.array[j].height.toString() + 'px';
+
+            this.lasti = i;
+        }
+        this.todispach.shift();
     }
 }
 
