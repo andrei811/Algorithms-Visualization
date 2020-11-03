@@ -5,12 +5,12 @@ Welcome to Algorithm Visualization! I built this site, with algorithms because I
 Attention! The site works well in Google Chrome.
 
 ## What algorithms you will find?
-* _Binary Search_ - Find an element in a sorted colection of elements in O(log(n))
-* _Selection Sort_ - Sorting 
-* _Bubble Sort_ - Sorting 
-* _Insertion Sort_ - Sorting
-* _Quick Sort_ - A fast sorting algorithm, based on Divide and Conquer Technique
-* _Lee Algorithm_ - BFS 
+* **_Binary Search** - Find an element in a sorted colection of elements in O(log(n))
+* **_Selection Sort_** - Sorting 
+* **_Bubble Sort_** - Sorting 
+* **_Insertion Sort_** - Sorting
+* **_Quick Sort_** - A fast sorting algorithm, based on Divide and Conquer Technique
+* **_Lee Algorithm_** - BFS 
 
 
 Site: https://andrei811.github.io/Algorithms-Visualization/
